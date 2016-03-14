@@ -1,0 +1,26 @@
+# Description of canned tab stops
+# Copyright (C) 1995 Free Software Foundation, Inc.
+# 
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+a	1,10,16,36,72	Assembler, IBM S/370, first format
+a2	1,10,16,40,72	Assembler, IBM S/370, second format
+c	1,8,12,16,20,55	COBOL, normal format
+c2	1,6,10,14,49	COBOL, compact format
+c3	1,6,10,14,18,22,26,30,34,38,42,46,50,54,58,62,67	COBOL, compact format with more tab stops
+f	1,7,11,15,19,23	FORTRAN
+p	1,5,9,13,17,21,25,29,33,37,41,45,49,53,57,61	PL/I
+s	1,10,55	SNOBOL
+u	1,12,20,44	UNIVAC 1100 Assembler

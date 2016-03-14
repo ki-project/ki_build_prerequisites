@@ -1,0 +1,8 @@
+New in version 2.0:
+
+* Package renamed to termutils.
+* Added SysV tabs utility.
+* tput has longname, init and reset options.
+* tput has --standard-input option.
+* Works with POSIX.1 termios systems as well as BSD sgtty.
+* Configuration updated to current standards.

@@ -1,0 +1,156 @@
+Thu Nov 30 14:26:52 1995  David J. MacKenzie  <djm@catapult.va.pubnix.com>
+
+	* Version 2.0.
+
+	* tabs.c: Use error instead of fprintf.
+	* tput.c: Rename --standard_input to --standard-input.
+	Use error instead of fprintf.
+	(main): Get canned tab stop from optval if set.
+	
+Sat Sep  2 19:31:56 1995  David J. MacKenzie  <djm@catapult.va.pubnix.com>
+
+	* tcutil.c, fgetline.c, conversions.c: Remove CONFIG_BROKETS code.
+
+Sat Nov  5 02:00:12 1994  David J. MacKenzie  <djm@catapult.va.pubnix.com>
+
+	* version.c: New file.
+	* tput.c, tabs.c: Use it.
+
+	* tabs.c (main): Use xmalloc, not alloca.
+	* tput.c (put_longname): Ditto.
+
+	* configure.in: Update for Autoconf v2.
+
+Thu Jun 23 21:08:13 1994  David J. MacKenzie  (djm@churchy.gnu.ai.mit.edu)
+
+	* tput.c [STDC_HEADERS]: Include stdlib.h.
+
+	* tabs.c, tput.c (usage): Add stream arg.  Change callers.
+	(version): Print to stdout.
+
+Thu Jan 20 22:53:06 1994  Noah Friedman  (friedman@gnu.ai.mit.edu)
+
+        * conversions.c, fgetline.c, tabs.c, tcutil.c, tput.c
+        [HAVE_CONFIG_H]: Include config.h.
+        Makefile.in (distclean): delete config.h.
+
+Sun Jan 16 17:01:50 1994  Noah Friedman  (friedman@gnu.ai.mit.edu)
+
+        * configure.in: Add AC_CONFIG_HEADER(config.h).
+        Makefile.in (DISTFILES): Add config.h.in.
+        (AUTOHEADER): New variable.
+        (config.h.in, config.h): New targets.
+
+        * Makefile.in (LDFLAGS): Don't set to -g, as per coding stds.
+        (realclean): Don't delete configure, as per coding stds.
+        (tput, tabs): Include $(CFLAGS) in rule.
+        (MV): New variable.
+        (fspec.c): Use it.
+        (CAT, ECHO, MKDIR, LN): New variables.
+        (dist): Use them.
+        (RM): New variable.
+        (uninstall, clean, mostlyclean, distclean, fspec.c, dist): Use it.
+        (AUTOCONF): New variable.
+        (configure): Use it.
+        (ETAGS): New variable.
+        (etags): Use it.
+        (MAKEINFO_FLAGS): New variable.
+        (tput,info, tabs.info): Use it.
+        (TEXI2DVI, TEXI2DVI_FLAGS): New variables.
+        (info, dvi, tput.dvi, tabs.dvi): New targets.
+        (alloca.o, _dep): Use $(CFLAGS) last in rule, as per coding stds.
+        (srcdir): Assign to $(VPATH), not @srcdir@.
+        (LOADLIBES): New variable, assigned to $(LIBS).
+        (tput, tabs): Use $(LOADLIBES) instead of $(LIBS).
+        (dist): Use --gzip, rather than -z, so that running non-GNU tar
+        will cause an abort.
+
+        * configure.in: Don't use AC_UNISTD_H, which is obsolete.
+        Check for unistd.h with AC_HAVE_HEADERS instead.
+
+        * clear.sh: Use ${1+"$@"} instead of $*, to preserve quoting.
+
+Thu Jul 29 20:54:23 1993  David J. MacKenzie  (djm@wookumz.gnu.ai.mit.edu)
+
+	* Makefile.in (config.status): Run config.status --recheck, not
+	configure, to get the right args passed.
+
+Thu Jul  8 20:07:55 1993  David J. MacKenzie  (djm@goldman.gnu.ai.mit.edu)
+
+	* Makefile.in (installdirs, configure, config.status,
+	Makefile): New targets.
+
+Mon Mar 22 23:32:58 1993  Junio Hamano  (junio@twinsun.com)
+
+	* tabs.c, tabs.h, fspec.def, fspec.sh: New files.
+	* tput.texinfo -> tput.texi
+	* tput.c: --stdin -> --standard-input
+	* tput.c: Don't strip leading path from argv[0].
+	* tput.c, conversions.c (find_info): moved to
+	conversions.c.  Add termcap_only argument.
+	* tcutil.c, tcutil.h (new files): Moved sgtty related
+	routines from tput.c.
+
+Fri Mar 19 23:13:23 1993  Junio Hamano  (junio@twinsun.com)
+
+	* Makefile.in, alloca.c: Distribute portable version of
+	alloca since getopt.c and tput.c uses it.
+	* Makefile.in, configure.in, tput.c: Use POSIX style
+	<termios.h> if available.  Otherwise, use BSD <sgtty.h>.
+	* Makefile.in, configure.in: Reward people who have GNU
+	termcap and GNU libc installed by not using the source
+	version of termcap and getopt routines supplied with this
+	package.
+	* Makefile.in: More documentation on what can be defined
+	in DEFS make variable.
+	* Makefile.in: Increment version number to 1.0.2.
+	* Makefile.in: More dependencies.
+	* Makefile.in: Make tput.info, if obsolete.
+	* configure.in: Remove AC_HAVE_FUNCS(strerror), which
+	is not used.
+	* tput.c: +terminal -> --terminal
+	* tput.c: Disable LCASE and CRMOD in addition to XTABS
+	when sending terminal control sequence.  On POSIX
+	systems, disable OPOST altogether.
+	* tput.c: Strip leading path from argv[0].
+	* tput.c: Add -V --version option.
+	* tput.c: Add -S --stdin option.
+	* tput.c: Implement longname, init and reset.
+
+Wed Apr 22 02:14:04 1992  David J. MacKenzie  (djm@churchy.gnu.ai.mit.edu)
+
+	* tput.c: SIGTYPE -> RETSIGTYPE.
+
+Fri Aug  2 14:32:46 1991  David J. MacKenzie  (djm at apple-gunkies)
+
+	* Makefile.in (dist): Include info files and texinfo.tex.
+	(install): Install info files.
+	* configure: Define INSTALLDATA.
+
+	* configure: Support +srcdir arg.  Create config.status and
+	remove it and Makefile if interrupted while creating them.
+	* Makefile.in: Add prefix.
+
+Mon Jul 15 13:49:40 1991  David J. MacKenzie  (djm at wookumz.gnu.ai.mit.edu)
+
+	* configure: Also look in sys/signal.h for signal decl.
+
+Thu Jul 11 22:23:01 1991  David J. MacKenzie  (djm at nutrimat)
+
+	* Version 1.0.
+
+Wed Jul 10 03:10:20 1991  David J. MacKenzie  (djm at wookumz.gnu.ai.mit.edu)
+
+	* Replace Makefile with configure and Makefile.in.
+
+	* Update to GPL 2.
+
+Sat Aug 11 00:33:39 1990  David J. MacKenzie  (djm at albert.ai.mit.edu)
+
+	* tput.c (main): Don't strip leading path from argv[0].
+	Remove -V +version option.
+	Rename a few things.
+
+Sun Dec  3 18:48:36 1989  David J. MacKenzie  (djm at hobbes.ai.mit.edu)
+
+	* tput.c: Merge short and long option usage messages. 

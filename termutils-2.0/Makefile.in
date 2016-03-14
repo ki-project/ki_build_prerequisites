@@ -1,0 +1,227 @@
+# Makefile.in generated automatically by automake from Makefile.am.
+# Copyright (C) 1994 Free Software Foundation, Inc.
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+SHELL = /bin/sh
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = $(exec_prefix)/bin
+sbindir = $(exec_prefix)/sbin
+libexecdir = $(exec_prefix)/libexec
+datadir = $(prefix)/share
+sysconfdir = $(prefix)/etc
+sharedstatedir = $(prefix)/com
+localstatedir = $(prefix)/var
+libdir = $(exec_prefix)/lib
+infodir = $(prefix)/info
+mandir = $(prefix)/man
+includedir = $(prefix)/include
+oldincludedir = /usr/include
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+transform = @program_transform_name@
+
+ALL = ${LIBFILES} ${PROGRAMS} ${LIBPROGRAMS} ${SCRIPTS} ${LIBSCRIPTS}
+CC = @CC@
+LEX = @LEX@
+YACC = @YACC@
+ANSI2KNR = ./ansi2knr
+
+DEFS = @DEFS@
+CPPFLAGS = @CPPFLAGS@
+CFLAGS = @CFLAGS@
+LDFLAGS = @LDFLAGS@
+LIBS = @LIBS@
+
+tput_OBJECTS = tput.o conversions.o
+tabs_OBJECTS = tabs.o fspec.o
+util_OBJECTS = version.o error.o xmalloc.o tcutil.o fgetline.o 	getopt.o getopt1.o termcap.o tparam.o 
+LIBFILES =  libutil.a
+AR = ar
+RANLIB = @RANLIB@
+ALLOCA = @ALLOCA@
+LIBOBJS = @LIBOBJS@
+
+MAKEINFO = makeinfo
+TEXI2DVI = texi2dvi
+
+TEXFILES = *.aux *.cp *.cps *.dvi *.fn *.fns *.ky *.log *.pg *.toc *.tp *.vr
+
+INFOS = tput.info*
+INFO_DEPS = tput.info
+DVIS = tput.dvi tabs.dvi
+SOURCES =  ${tput_SOURCES} ${tabs_SOURCES} ${util_SOURCES}
+DIST_CONF = Makefile.am Makefile.in README INSTALL NEWS \
+	configure configure.in ${ACLOCAL} ${ACCONFIG} ${CONFIG_TOP} \
+	${CONFIG_BOT} mkinstalldirs
+DIST_FILES = $(DIST_CONF) $(SOURCES) $(TEXINFOS) $(INFOS) $(MANS) $(DIST_OTHER)
+
+PROGRAMS = tput tabs
+LIBRARIES = util
+TEXINFOS = tput.texi
+
+util_SOURCES = version.c error.c xmalloc.c tcutil.c fgetline.c \
+	getopt.c getopt1.c termcap.c tparam.c $(util_OPT_SOURCES)
+util_OPT_SOURCES = bsearch.c
+tput_SOURCES = tput.c conversions.c
+tabs_SOURCES = tabs.c fspec.c
+
+HEADERS = tput.h tabs.h tcutil.h getopt.h termcap.h
+DIST_OTHER = COPYING ChangeLog install-sh texinfo.tex \
+	$(HEADERS) fspec.def fspec.sh config.h.in
+
+INCLUDES = -I$(srcdir) -I.
+
+LDADD = libutil.a
+CLEANFILES = fspec.c fspec.ct
+
+all:: ${ALL}
+
+.c.o:
+	$(CC) -c $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS) $<
+
+install:: install-programs
+
+install-programs: $(PROGRAMS) $(SCRIPTS)
+	$(top_srcdir)/mkinstalldirs $(bindir)
+	for p in $(PROGRAMS) $(SCRIPTS); do \
+	  $(INSTALL_PROGRAM) $$p $(bindir)/`echo $$p|sed '$(transform)'`; \
+	done
+
+uninstall:: uninstall-programs
+
+uninstall-programs:
+	for p in $(PROGRAMS) $(SCRIPTS); do \
+	  rm -f $(bindir)/`echo $$p|sed '$(transform)'`; \
+	done
+
+tput: $(tput_OBJECTS)
+	$(CC) -o $@ $(tput_OBJECTS) $(LDADD) $(LDFLAGS) $(LIBS)
+
+tabs: $(tabs_OBJECTS)
+	$(CC) -o $@ $(tabs_OBJECTS) $(LDADD) $(LDFLAGS) $(LIBS)
+
+install:: install-libraries
+
+install-libraries: $(LIBFILES)
+
+uninstall:: uninstall-libraries
+
+uninstall-libraries:
+
+libutil.a: $(util_OBJECTS) @LIBOBJS@ @ALLOCA@
+	rm -f libutil.a
+	$(AR) cru libutil.a $(util_OBJECTS) @LIBOBJS@ @ALLOCA@
+	$(RANLIB) libutil.a
+
+.SUFFIXES: .texi .info .dvi
+
+.texi.info:
+	$(MAKEINFO) -I$(srcdir) $<
+
+.texi.dvi:
+	TEXINPUTS=$(srcdir):$$TEXINPUTS $(TEXI2DVI) $<
+
+info:: $(INFO_DEPS)
+
+dvi:: $(DVIS)
+
+install:: install-info
+
+install-info: $(INFO_DEPS)
+	$(top_srcdir)/mkinstalldirs $(infodir)
+	cd $(srcdir); for file in *.info*; do \
+	  $(INSTALL_DATA) $$file $(infodir)/$$file; \
+	done
+
+uninstall:: uninstall-info
+
+uninstall-info:
+	cd $(srcdir); for file in *.info*; do \
+	  rm -f $(infodir)/$$file; \
+	done
+
+mostlyclean:
+	rm -f *.o core
+
+clean: mostlyclean
+	rm -f $(PROGRAMS) $(LIBPROGRAMS) $(LIBFILES) $(TEXFILES) $(CLEANFILES)
+
+distclean: clean
+	rm -f Makefile *.tab.c $(DISTCLEANFILES)
+	rm -f config.cache config.log config.status ${CONFIG_HEADER} stamp-h
+
+maintainer-clean:: distclean
+maintainer-clean::
+	@echo "This command is intended for maintainers to use;"
+	@echo "rebuilding the deleted files requires makeinfo."
+	rm -f TAGS $(INFOS)
+
+# For an explanation of the following Makefile rules, see node
+# `Automatic Remaking' in GNU Autoconf documentation.
+Makefile: Makefile.in config.status
+	CONFIG_FILES=$@ CONFIG_HEADERS= ./config.status
+config.status: configure
+	./config.status --recheck
+${srcdir}/configure: configure.in ${ACLOCAL}
+	cd $(srcdir); autoconf
+
+dist: $(DIST_FILES) $(DIST_DIRS) distname
+	rm -rf `cat distname`; mkdir `cat distname`
+	@for file in $(DIST_FILES); do \
+	  echo linking $$file; \
+	  ln $(srcdir)/$$file `cat distname`/$$file || \
+	    { echo copying $$file instead; cp -p $(srcdir)/$$file `cat distname`/$$file;}; \
+	done
+	chmod -R a+r `cat distname`
+	tar -chozf `cat distname`.tar.gz `cat distname`
+	rm -rf `cat distname` distname
+
+check dvi info install uninstall::
+
+tags:: TAGS
+
+TAGS::
+	cd $(srcdir); etags $(SOURCES)
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:
+
+$(PROGRAMS): libutil.a
+
+fspec.c: fspec.sh fspec.def
+	rm -f $@ $@t
+	/bin/sh $(srcdir)/fspec.sh $(srcdir)/fspec.def > $@t
+	mv $@t $@
+
+conversions.o: tput.h
+fspec.o: tabs.h
+getopt.o: getopt.h
+getopt1.o: getopt.h
+tabs.o: termcap.h getopt.h tcutil.h tabs.h
+tcutil.o: tcutil.h termcap.h
+tput.o: termcap.h getopt.h tcutil.h tput.h
+
+distname:
+	echo termutils-`sed -e '/version_string/!d' -e 's/[^0-9.]*\([0-9.]*\).*/\1/' -e q version.c` > $@
